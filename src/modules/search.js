@@ -8,7 +8,7 @@ import {
 import prompt from "prompt-sync";
 
 export default async function SearchStrInDb() {
-  const pathDb = "./db";
+  const pathDb = "../db";
   const outPath = "./results";
 
   console.clear();
