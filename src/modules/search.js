@@ -41,6 +41,8 @@ export default async function SearchStrInDb() {
   console.log(`searching in the ${filesInDirectory.length} files ...`);
 
   const lines = new Array();
+  let saves = new Object();
+
 
   await Promise.all(
     filesInDirectory.map(async (file) => {
@@ -51,7 +53,12 @@ export default async function SearchStrInDb() {
           chunk.split("\n").map((line) => {
 
             const existAllWordsInLine = words.every((currentWord) => line.includes(currentWord))
-            if(existAllWordsInLine) lines.push(line);
+           let isNewLine = !saves?.[line];
+
+            if(existAllWordsInLine && isNewLine) {
+              lines.push(line);
+              saves[line] = {};
+            }
           });
         });
 
